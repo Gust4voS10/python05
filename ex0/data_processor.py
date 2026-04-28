@@ -122,12 +122,12 @@ def test():
     print("Extracting 1 value...")
     print(f"Text value 0: {tp.output()}")
 
-    print("Testing Log Processor...")
+    print("\nTesting Log Processor...")
     lp = LogProcessor()
 
     print(f"Trying to validate input 'Hello': {lp.validate('Hello')}")
 
-    log_data = [
+    log_data: list[dict[str, str]] = [
         {"log_level": "NOTICE", "log_message": "Connection to server"},
         {"log_level": "ERROR\n", "log_message": "Unauthorized access!!"},
     ]

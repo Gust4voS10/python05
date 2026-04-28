@@ -97,7 +97,7 @@ class LogProcessor(DataProcessor):
 
 
 class DataStream:
-    def __init__(self):
+    def __init__(self) -> None:
         self._processors: list[DataProcessor] = []
 
     def register_processor(self, proc: DataProcessor) -> None:
@@ -137,7 +137,7 @@ class DataStream:
                       f"{len(proc._storage)} on processor")
 
 
-def test_data_stream():
+def test_data_stream() -> None:
     print("=== Code Nexus - Data Stream ===\n")
 
     print("Initialize Data Stream...")
