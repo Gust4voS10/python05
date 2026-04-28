@@ -135,7 +135,19 @@ class DataStream:
                 print(f"Log Processor: total {proc._total_processed} items "
                       f"processed, remaining "
                       f"{len(proc._storage)} on processor")
+    
+    def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
+        output_data = []
+        for proc in self._processors:
+            name = proc.__class__.__name__
+            for _ in range(min(nb, len(proc._storage))):
+                output_data.append((proc._total_processed, proc.output()))
+        plugin.process_output(output_data)
 
+
+class  ExportPlugin(protocol):
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        ...
 
 def test_data_stream():
     print("=== Code Nexus - Data Stream ===\n")
