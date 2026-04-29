@@ -4,7 +4,7 @@ import typing
 
 
 class DataProcessor(ABC):
-    def __init__(self):
+    def __init__(self) -> None:
         self._storage: list[str] = []
         self._total_processed: int = 0
         self._index: int = -1
@@ -67,7 +67,7 @@ class TextProcessor(DataProcessor):
 
 class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        def is_log_dict(d):
+        def is_log_dict(d: dict[str, str]) -> bool:
             return (
                 isinstance(d, dict)
                 and all(isinstance(k, str) and
@@ -121,7 +121,7 @@ class ExportJSON:
 
 
 class DataStream:
-    def __init__(self):
+    def __init__(self) -> None:
         self._processors: list[DataProcessor] = []
 
     def register_processor(self, proc: DataProcessor) -> None:
@@ -172,7 +172,7 @@ class DataStream:
             plugin.process_output(to_export)
 
 
-def test_data_pipeline():
+def test_data_pipeline() -> None:
     print("=== Code Nexus - Data Stream ===\n")
 
     print("Initialize Data Stream...\n")

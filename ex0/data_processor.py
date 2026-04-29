@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 
 class DataProcessor(ABC):
-    def __init__(self):
+    def __init__(self) -> None:
         self._storage: list[str] = []
 
     @abstractmethod
@@ -61,7 +61,7 @@ class TextProcessor(DataProcessor):
 
 class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        def is_log_dict(d):
+        def is_log_dict(d: dict[str, str]) -> bool:
             return (
                 isinstance(d, dict)
                 and all(isinstance(k, str) and
@@ -88,7 +88,7 @@ class LogProcessor(DataProcessor):
             self._storage.append(formatted)
 
 
-def test():
+def test() -> None:
     print("Testing Numeric Processor...")
     np = NumericProcessor()
 
@@ -98,13 +98,13 @@ def test():
     try:
         print("Test invalid ingestion of string "
               "'foo' without prior validation:")
-        np.ingest("foo")
+        np.ingest("foo")  # type: ignore
     except Exception as e:
         print(f"Got exception: {e}")
 
     data = [1, 2, 3, 4, 5]
     print(f"Processing data: {data}")
-    np.ingest(data)
+    np.ingest(data)  # type: ignore
 
     print("Extracting 3 values...")
     for i in range(3):

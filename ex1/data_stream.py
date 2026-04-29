@@ -4,7 +4,7 @@ import typing
 
 
 class DataProcessor(ABC):
-    def __init__(self):
+    def __init__(self) -> None:
         self._storage: list[str] = []
         self._total_processed: int = 0
 
@@ -67,7 +67,7 @@ class TextProcessor(DataProcessor):
 
 class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        def is_log_dict(d):
+        def is_log_dict(d: dict[str, str]) -> bool:
             return (
                 isinstance(d, dict)
                 and all(isinstance(k, str) and
